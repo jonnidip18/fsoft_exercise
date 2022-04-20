@@ -1,7 +1,7 @@
-import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.PriorityQueue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.redisson.Redisson;
 import org.redisson.api.RQueue;
@@ -13,8 +13,12 @@ public class Queue_producer {
 
         RQueue<String> queue = redisson.getQueue("myQueue");
 
-        queue.add(Calendar.getInstance().getTime().toString());
+        (new Timer()).schedule(new TimerTask() {
+            public void run() {
+                queue.add(Calendar.getInstance().getTime().toString());
 
-        System.out.println(queue);
+                System.out.println(queue);
+            }
+        }, 0L, 1000L);
     }
 }
