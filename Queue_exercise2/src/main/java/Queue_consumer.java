@@ -16,6 +16,6 @@ public class Queue_consumer {
             public void run() {
                 System.out.println(queue.poll());
             }
-        }, 1000L, 2000L);
+        }, 10, 2000);
     }
 }

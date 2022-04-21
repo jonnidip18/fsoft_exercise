@@ -16,9 +16,7 @@ public class Queue_producer {
         (new Timer()).schedule(new TimerTask() {
             public void run() {
                 queue.add(Calendar.getInstance().getTime().toString());
-
-                System.out.println(queue);
             }
-        }, 0L, 1000L);
+        }, 0, 1000);
     }
 }

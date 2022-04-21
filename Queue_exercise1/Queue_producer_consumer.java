@@ -1,22 +1,31 @@
-import java.util.Calendar;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Queue_producer_consumer {
 
     public static void main(String... args) {
         final Queue<String> pq = new PriorityQueue();
-        (new Timer()).schedule(new TimerTask() {
+        Timer timer = new Timer();
+        TimerTask producer = new TimerTask() {
             public void run() {
                 pq.add(Calendar.getInstance().getTime().toString());
             }
-        }, 0L, 1000L);
-        (new Timer()).schedule(new TimerTask() {
+        };
+        TimerTask consumer = new TimerTask() {
             public void run() {
-                System.out.println((String)pq.poll());
+                System.out.println(pq.poll());
             }
-        }, 1000L, 2000L);
+        };
+        timer.scheduleAtFixedRate(producer,0L,1000L);
+        timer.scheduleAtFixedRate(consumer,0L,2000L);
+//        (new Timer()).schedule(new TimerTask() {
+//            public void run() {
+//                pq.add(Calendar.getInstance().getTime().toString());
+//            }
+//        }, 0L, 1000L);
+//        (new Timer()).schedule(new TimerTask() {
+//            public void run() {
+//                System.out.println((String)pq.poll());
+//            }
+//        }, 1000L, 2000L);
     }
 }
